@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160b24">
+  <meta name="description" content="A special birthday surprise for Tuba.">
+  <title>Happy Birthday Tuba ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0d0715;
+      --bg2:#1a0c25;
+      --card:rgba(255,255,255,.085);
+      --line:rgba(255,255,255,.16);
+      --text:#fff8ff;
+      --muted:#dccfe1;
+      --pink:#ff8fc8;
+      --rose:#ff5fa8;
+      --gold:#ffd88a;
+      --lav:#cbb7ff;
+      --shadow:0 25px 80px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      color:var(--text);
+      font-family:Poppins,system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,126,190,.16), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(179,142,255,.15), transparent 30%),
+        linear-gradient(145deg,var(--bg),var(--bg2) 55%,#09050e);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;inset:0;pointer-events:none;opacity:.24;z-index:-1;
+      background-image:
+        radial-gradient(circle,rgba(255,255,255,.8) 0 1px,transparent 1.5px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(to bottom,black,transparent 85%);
+    }
+    .petals,.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:30}
+    .petal,.heart{
+      position:absolute;bottom:-10vh;opacity:0;
+      animation:rise linear forwards;
+      filter:drop-shadow(0 0 8px rgba(255,129,191,.35));
+    }
+    .petal{font-size:20px}
+    .heart{font-size:18px}
+    @keyframes rise{
+      0%{transform:translateY(0) translateX(0) rotate(0deg) scale(.7);opacity:0}
+      10%{opacity:.75}
+      90%{opacity:.85}
+      100%{transform:translateY(-120vh) translateX(var(--drift)) rotate(var(--rot)) scale(1.2);opacity:0}
+    }
+
+    .screen{
+      min-height:100svh;display:flex;align-items:center;justify-content:center;
+      padding:26px 18px;position:relative;
+    }
+    .countdown-wrap{text-align:center;max-width:900px}
+    .eyebrow{letter-spacing:.28em;text-transform:uppercase;color:var(--pink);font-size:.76rem;font-weight:600;margin-bottom:16px}
+    .countdown{
+      font-family:"Cormorant Garamond",serif;font-size:clamp(6rem,23vw,13rem);
+      font-weight:700;line-height:.85;
+      text-shadow:0 0 28px rgba(255,122,187,.35);
+      animation:countPulse .95s ease-in-out infinite alternate;
+    }
+    @keyframes countPulse{to{transform:scale(1.05);text-shadow:0 0 46px rgba(255,122,187,.65)}}
+    .count-caption{font-size:.98rem;color:var(--muted);margin-top:24px}
+    .hide{display:none!important}
+
+    .hero{
+      width:min(1100px,100%);
+      padding:38px 0 22px;
+    }
+    .hero-grid{
+      display:grid;grid-template-columns:minmax(280px,430px) 1fr;
+      gap:44px;align-items:center;
+    }
+    .photo-card{
+      position:relative;border-radius:34px;padding:11px;
+      background:linear-gradient(145deg,rgba(255,255,255,.28),rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+      transform:rotate(-2deg);
+      transition:.5s ease;
+    }
+    .photo-card:hover{transform:rotate(0) translateY(-8px)}
+    .photo-card::after{
+      content:"";position:absolute;inset:12px;border-radius:26px;
+      border:1px solid rgba(255,255,255,.22);pointer-events:none;
+    }
+    .photo-card img{
+      width:100%;display:block;aspect-ratio:4/5;object-fit:cover;object-position:center;
+      border-radius:25px;
+    }
+    .photo-badge{
+      position:absolute;bottom:25px;left:25px;
+      background:rgba(10,5,16,.72);backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.18);
+      padding:10px 14px;border-radius:999px;font-size:.78rem;color:#fff;
+    }
+    .hero-copy .tiny{color:var(--gold);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+    .hero-copy h1{
+      font:700 clamp(4.2rem,10vw,7.9rem)/.77 "Cormorant Garamond",serif;
+      letter-spacing:-.03em;margin-bottom:18px;
+    }
+    .hero-copy h1 span{display:block;background:linear-gradient(90deg,#fff,#ffc7e3 45%,#cdbdff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-copy .lead{font-size:1.05rem;line-height:1.9;color:var(--muted);max-width:640px}
+    .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+    .open-btn{
+      border:0;color:#2b1021;font-weight:700;font-size:.98rem;cursor:pointer;
+      padding:15px 24px;border-radius:999px;
+      background:linear-gradient(100deg,#ffd2e8,#ff8fc5);
+      box-shadow:0 10px 34px rgba(255,111,174,.27);
+      transition:.25s ease;
+    }
+    .open-btn:hover{transform:translateY(-3px) scale(1.02)}
+    .open-btn:active{transform:translateY(0) scale(.98)}
+    .small-note{align-self:center;color:#bcaec2;font-size:.82rem}
+
+    .content{display:none;width:min(950px,100%);margin:auto;padding:20px 0 70px}
+    .content.show{display:block;animation:enter .9s ease both}
+    @keyframes enter{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+    .section{margin-top:30px}
+    .section-card{
+      background:var(--card);border:1px solid var(--line);border-radius:30px;
+      padding:clamp(24px,4vw,40px);backdrop-filter:blur(14px);
+      box-shadow:0 16px 55px rgba(0,0,0,.22);
+    }
+    .section-card h2{
+      font:700 clamp(2.2rem,6vw,3.8rem)/1 "Cormorant Garamond",serif;
+      margin-bottom:16px;
+    }
+    .section-card h2 span{color:var(--pink)}
+    .section-card p{color:var(--muted);line-height:1.9;font-size:1rem}
+    .wish-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:18px}
+    .wish{
+      background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);
+      border-radius:24px;padding:24px;transition:.3s ease;
+    }
+    .wish:hover{transform:translateY(-5px);background:rgba(255,255,255,.08)}
+    .wish .icon{font-size:1.65rem;margin-bottom:10px}
+    .wish h3{font-size:1rem;margin-bottom:8px}
+    .wish p{font-size:.9rem;line-height:1.75}
+    .dua{
+      margin-top:18px;padding:24px;border-radius:24px;
+      background:linear-gradient(140deg,rgba(255,205,226,.12),rgba(203,183,255,.09));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .dua strong{display:block;color:#ffd7ea;margin-bottom:8px}
+    .signature{text-align:center;margin-top:48px;padding:30px 15px 8px}
+    .signature .line{width:90px;height:1px;margin:0 auto 18px;background:linear-gradient(90deg,transparent,#ff9dc8,transparent)}
+    .signature .from{font-size:.8rem;color:#bbaebe;letter-spacing:.22em;text-transform:uppercase}
+    .signature .name{
+      font:700 clamp(2.7rem,8vw,5.3rem)/1 "Cormorant Garamond",serif;
+      background:linear-gradient(90deg,#fff1f8,#ff9dca,#d6c8ff);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      margin-top:8px;
+    }
+    .footer{color:#8e7c95;text-align:center;font-size:.75rem;padding:8px 0 40px}
+
+    .music-pill{
+      position:fixed;right:16px;bottom:16px;z-index:40;
+      display:none;align-items:center;gap:9px;padding:11px 14px;border-radius:999px;
+      background:rgba(18,8,25,.82);backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.16);font-size:.78rem;color:#eaddea;
+    }
+    .music-pill.show{display:flex}
+    .eq{display:flex;gap:3px;align-items:flex-end;height:14px}
+    .eq i{display:block;width:3px;border-radius:3px;background:#ff9ecb;animation:eq .7s ease-in-out infinite alternate}
+    .eq i:nth-child(1){height:6px}.eq i:nth-child(2){height:13px;animation-delay:.18s}.eq i:nth-child(3){height:9px;animation-delay:.35s}
+    @keyframes eq{to{transform:scaleY(.35)}}
+
+    @media (max-width:780px){
+      .hero-grid{grid-template-columns:1fr;gap:30px}
+      .photo-card{width:min(430px,92%);margin:auto}
+      .hero-copy{text-align:center}
+      .hero-copy .lead{margin:auto}
+      .cta-row{justify-content:center}
+      .wish-grid{grid-template-columns:1fr}
+      .section-card{border-radius:24px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+    }
+  </style>
+</head>
+<body>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+  <main id="countdownScreen" class="screen">
+    <div class="countdown-wrap">
+      <div class="eyebrow">A little surprise is waiting…</div>
+      <div id="countdown" class="countdown">3</div>
+      <div id="countCaption" class="count-caption">Get ready ✨</div>
+    </div>
+  </main>
+
+  <main id="mainScreen" class="screen hide">
+    <div class="hero">
+      <div class="hero-grid">
+        <div class="photo-card">
+          <img src="assets/tuba.jpg" alt="Tuba's birthday picture">
+          <div class="photo-badge">Made with a little extra happiness ✨</div>
+        </div>
+
+        <div class="hero-copy">
+          <div class="tiny">Today is your day</div>
+          <h1>
+            Happy Birthday,
+            <span>Tuba ✨</span>
+          </h1>
+          <p class="lead">
+            A tiny webpage for a genuinely special friend — with a few words,
+            lots of duas, and a song waiting behind one little button.
+          </p>
+          <div class="cta-row">
+            <button class="open-btn" id="openBtn">Open This ✨</button>
+            <div class="small-note">Turn your volume up a little 🎧</div>
+          </div>
+        </div>
+      </div>
+
+      <section id="wishContent" class="content">
+        <div class="section">
+          <div class="section-card">
+            <h2>For you, <span>Tuba</span> 🌷</h2>
+            <p>
+              Happy Birthday to one of the nicest people I have had the chance to call my friend.
+              May this new year of your life bring you peaceful days, beautiful surprises,
+              genuine smiles, and people who always make you feel valued. You deserve a year
+              that feels lighter, happier, and full of good memories.
+            </p>
+          </div>
+        </div>
+
+        <div class="wish-grid">
+          <div class="wish">
+            <div class="icon">🌸</div>
+            <h3>May your days be beautiful</h3>
+            <p>
+              May every ordinary day bring you at least one reason to smile, and may the
+              memories you make this year become the ones you remember for a very long time.
+            </p>
+          </div>
+
+          <div class="wish">
+            <div class="icon">✨</div>
+            <h3>May your dreams come closer</h3>
+            <p>
+              Keep believing in yourself. May Allah open the right doors for you, put barakah
+              in your efforts, and take you towards every good thing written for you.
+            </p>
+          </div>
+
+          <div class="wish">
+            <div class="icon">🕊️</div>
+            <h3>May your heart stay peaceful</h3>
+            <p>
+              May you always have peace in your heart, confidence in your steps, and people
+              around you who respect your feelings and celebrate your happiness.
+            </p>
+          </div>
+
+          <div class="wish">
+            <div class="icon">💫</div>
+            <h3>May this year be your year</h3>
+            <p>
+              New age, new memories, new chances. I hope this chapter gives you more happiness,
+              more laughter, and countless moments you will look back on with a smile.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-card">
+            <div class="dua">
+              <strong>A special dua for you 🤍</strong>
+              <p>
+                May Allah bless you with good health, a peaceful heart, sincere friendships,
+                success in your studies and goals, protection from every difficulty, and
+                happiness that stays. May your parents' duas surround you, may your future
+                be full of khair, and may Allah write the most beautiful things in your destiny.
+                Ameen. 🤲✨
+              </p>
+            </div>
+
+            <div class="signature">
+              <div class="line"></div>
+              <div class="from">With the best wishes always</div>
+              <div class="name">Your Friend Irfan Joiya</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          Made especially for Tuba • Happy Birthday ✨
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="music-pill" id="musicPill">
+    <div class="eq"><i></i><i></i><i></i></div>
+    <span>Birthday surprise is playing 🎶</span>
+  </div>
+
+  <audio id="birthdaySong" preload="auto">
+    <source src="assets/birthday-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    (() => {
+      const countdownScreen = document.getElementById('countdownScreen');
+      const mainScreen = document.getElementById('mainScreen');
+      const countdown = document.getElementById('countdown');
+      const caption = document.getElementById('countCaption');
+      const openBtn = document.getElementById('openBtn');
+      const content = document.getElementById('wishContent');
+      const audio = document.getElementById('birthdaySong');
+      const musicPill = document.getElementById('musicPill');
+
+      const captions = {
+        3: 'Get ready ✨',
+        2: 'Something special is coming… 🌷',
+        1: 'One more second… 💗'
+      };
+
+      let n = 3;
+      countdown.textContent = n;
+      caption.textContent = captions[n];
+
+      const timer = setInterval(() => {
+        n--;
+        if (n > 0) {
+          countdown.textContent = n;
+          caption.textContent = captions[n];
+        } else {
+          clearInterval(timer);
+          countdownScreen.classList.add('hide');
+          mainScreen.classList.remove('hide');
+          burstHearts();
+        }
+      }, 1000);
+
+      function createFloatingSymbols() {
+        const symbols = ['🌸','🌷','💗','✨','♡'];
+        const parent = document.getElementById('petals');
+        for (let i = 0; i < 24; i++) {
+          const el = document.createElement('span');
+          el.className = i % 2 ? 'heart' : 'petal';
+          el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+          el.style.left = Math.random() * 100 + 'vw';
+          el.style.animationDelay = (Math.random() * 7) + 's';
+          el.style.animationDuration = (7 + Math.random() * 8) + 's';
+          el.style.setProperty('--drift', ((Math.random() * 180) - 90) + 'px');
+          el.style.setProperty('--rot', ((Math.random() * 1000) - 500) + 'deg');
+          parent.appendChild(el);
+        }
+      }
+
+      function burstHearts() {
+        const parent = document.getElementById('hearts');
+        const symbols = ['💗','💖','✨','🌸','💕'];
+        for (let i = 0; i < 22; i++) {
+          const el = document.createElement('span');
+          el.className = 'heart';
+          el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+          el.style.left = (35 + Math.random() * 30) + 'vw';
+          el.style.animationDuration = (4 + Math.random() * 4) + 's';
+          el.style.animationDelay = (Math.random() * .8) + 's';
+          el.style.setProperty('--drift', ((Math.random() * 300) - 150) + 'px');
+          el.style.setProperty('--rot', ((Math.random() * 800) - 400) + 'deg');
+          parent.appendChild(el);
+          setTimeout(() => el.remove(), 9000);
+        }
+      }
+
+      openBtn.addEventListener('click', async () => {
+        content.classList.add('show');
+        openBtn.disabled = true;
+        openBtn.textContent = 'Surprise Opened 💗';
+        musicPill.classList.add('show');
+
+        try {
+          audio.currentTime = 0;
+          await audio.play();
+        } catch (err) {
+          musicPill.querySelector('span').textContent = 'Tap again if your browser blocked the music 🎧';
+          openBtn.disabled = false;
+          openBtn.textContent = 'Play Surprise 🎶';
+        }
+
+        burstHearts();
+        setTimeout(() => content.scrollIntoView({behavior:'smooth', block:'start'}), 250);
+      });
+
+      createFloatingSymbols();
+    })();
+  </script>
+</body>
+</html>
